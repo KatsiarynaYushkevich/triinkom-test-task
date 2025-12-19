@@ -1,0 +1,7 @@
+@use 'variables';
+@use 'mixins';
+@use 'reset';
+
+body{
+background-color: variables.$color-bg-main;
+}

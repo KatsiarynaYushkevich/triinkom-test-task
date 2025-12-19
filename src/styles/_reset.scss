@@ -1,0 +1,27 @@
+*, *:before, *:after{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+button {
+  background-color: transparent;
+  color: inherit;
+  border-width: 0;
+  cursor: pointer;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+input{
+  --webkit-appearance: none;
+  border-radius: 0;
+}

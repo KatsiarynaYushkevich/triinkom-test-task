@@ -1,0 +1,14 @@
+@use 'palette';
+
+$color-bg-main: palette.$purple-100;
+$card-bg: palette.$white;
+
+$color-text-primary: palette.$purple-900;
+$color-text-secondary: palette.$gray-400;
+$color-text-inverse: palette.$white;
+
+$color-border-default: palette.$gray-400;
+$color-border-warning: palette.$orange-500;
+
+$color-accent: palette.$teal-500;
+$color-warning: palette.$orange-500;
