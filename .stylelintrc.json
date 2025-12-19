@@ -5,11 +5,25 @@
     "stylelint-config-recommended-vue",
     "stylelint-scss"
   ],
+  "plugins": ["stylelint-scss"],
   "rules": {
     "indentation": 2,
     "string-quotes": "double",
     "color-hex-case": "lower",
     "max-empty-lines": 2,
-    "no-descending-specificity": null
+    "no-descending-specificity": null,
+    "at-rule-no-unknown": [
+      true,
+      {
+        "ignoreAtRules": [
+          "use",
+          "forward",
+          "mixin",
+          "include",
+          "function",
+          "return"
+        ]
+      }
+    ]
   }
 }
