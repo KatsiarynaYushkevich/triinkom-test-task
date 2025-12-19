@@ -1,4 +1,6 @@
-*, *:before, *:after{
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -17,11 +19,13 @@ button {
   cursor: pointer;
 }
 
-ul, ol {
+ul,
+ol {
   list-style: none;
 }
 
-input{
+input {
   --webkit-appearance: none;
+
   border-radius: 0;
 }
