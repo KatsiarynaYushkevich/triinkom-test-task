@@ -14,10 +14,12 @@
 
     "baseUrl": ".",
     "paths": {
+      "@assets/*": ["./src/assets/*"],
       "@components/*": ["./src/components/*"],
-      "@constants/*":["./src/constants/*"],
-      "@store/*":["./src/store"],
-      "@styles/*":["./src/styles"]
+      "@composables/*": ["./src/composables/*"],
+      "@constants/*": ["./src/constants/*"],
+      "@store/*": ["./src/store/*"],
+      "@styles/*": ["./src/styles/*"]
     }
   },
   "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue"]
