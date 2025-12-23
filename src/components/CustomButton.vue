@@ -2,25 +2,28 @@
   <button
     :class="['base-button', typeClass]"
     :style="buttonStyle"
-    :disabled="disabled || loading"
-    @click="emit('handleClick', $event)"
+    :disabled="props.disabled || props.loading"
+    @click="handleClick"
   >
-    <template v-if="loading">
-      <span class="spinner"></span>
-    </template>
-    <template v-else>
-      <slot>{{ label }}</slot>
-    </template>
+    <slot name="icon"></slot>
+    <slot>{{ props.label }}</slot>
+    <slot name="loader" v-if="props.loading"> </slot>
   </button>
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue';
 import { useStyle } from '@composables/useStyle';
+import { BUTTON_TYPES } from '@constants/buttonTypes';
+
+const BUTTON_CLASSES = {
+  [BUTTON_TYPES.basic]: 'btn-basic',
+  [BUTTON_TYPES.icon]: 'btn-icon',
+} as const;
 
 interface CustomButtonProps {
   label?: string;
-  type?: 'basic' | 'icon';
+  type?: keyof typeof BUTTON_TYPES;
   width?: string;
   height?: string;
   disabled?: boolean;
@@ -29,14 +32,14 @@ interface CustomButtonProps {
 
 const props = withDefaults(defineProps<CustomButtonProps>(), {
   label: 'Button',
-  type: 'basic',
+  type: BUTTON_TYPES.basic,
   width: '250px',
   height: '45px',
   disabled: false,
   loading: false,
 });
 
-const typeClass = computed(() => (props.type === 'icon' ? 'btn-icon' : 'btn-basic'));
+const typeClass = computed(() => BUTTON_CLASSES[props.type ?? BUTTON_TYPES.basic]);
 
 const buttonStyle = useStyle({
   width: props.width,
@@ -46,6 +49,10 @@ const buttonStyle = useStyle({
 const emit = defineEmits<{
   (e: 'handleClick', event: MouseEvent): void;
 }>();
+
+function handleClick(event: MouseEvent) {
+  emit('handleClick', event);
+}
 </script>
 
 <style scoped lang="scss">
@@ -73,7 +80,7 @@ const emit = defineEmits<{
     font-family: $inter;
 
     &:hover:not(:disabled) {
-      background-color: $teal-600;
+      background-color: $color-basic-hover;
     }
   }
 
@@ -81,8 +88,9 @@ const emit = defineEmits<{
     background-color: transparent;
     min-width: 48px;
     min-height: 48px;
+
     &:hover:not(:disabled) {
-      background-color: $teal-600;
+      background-color: $color-basic-hover;
     }
   }
 }
