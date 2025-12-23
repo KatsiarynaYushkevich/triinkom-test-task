@@ -29,13 +29,13 @@ $inter-font-path: '@assets/fonts/inter';
 }
 
 @font-face {
-  src: url(#{$vela-sans-font-path}/VelaSans-SemiBold.ttf) format('truetype');
+  src: url(#{$vela-sans-font-path}/VelaSans-Bold.ttf) format('truetype');
   font-family: $vela-sans;
   font-weight: $bold;
 }
 
 @font-face {
-  src: url(#{$vela-sans-font-path}/VelaSans-SemiBold.ttf) format('truetype');
+  src: url(#{$vela-sans-font-path}/VelaSans-ExtraBold.ttf) format('truetype');
   font-family: $vela-sans;
   font-weight: $extra-bold;
 }

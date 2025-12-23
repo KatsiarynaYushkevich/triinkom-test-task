@@ -1,12 +1,14 @@
 <script setup lang="ts">
 import { useStepsStore } from '@store/steps';
 import StepCard from '@components/StepCard.vue';
+import StepsProgressLine from '@components/StepsProgressLine.vue';
 
 const stepsStore = useStepsStore();
 </script>
 
 <template>
   <div class="steps-list">
+    <StepsProgressLine />
     <div class="steps-cards">
       <StepCard
         v-for="(step, index) in stepsStore.steps"
@@ -23,8 +25,9 @@ const stepsStore = useStepsStore();
 .steps-list {
   min-width: 325px;
   display: flex;
-  gap: 15px;
+  align-items: center;
   justify-content: space-between;
+  gap: 15px;
 
   .steps-cards {
     display: flex;
@@ -34,8 +37,21 @@ const stepsStore = useStepsStore();
   }
 }
 
+@media screen and (min-width: 550px) {
+  .steps-list {
+    gap: 17px;
+    .steps-cards {
+      gap: 40px;
+    }
+  }
+}
+
 @media screen and (min-width: 1510px) {
   .steps-list {
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: flex-end;
+
     .steps-cards {
       flex-direction: row;
       gap: 40px;
