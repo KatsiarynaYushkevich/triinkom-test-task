@@ -33,14 +33,29 @@ const { title, icon, status } = defineProps<StepCardProps>();
 <style lang="scss" scoped>
 .step-card {
   position: relative;
+  z-index: 3;
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 265px;
   height: 80px;
   padding: 15px;
+  border: 3px solid;
   border-radius: 15px;
   background-color: $card-bg;
+
+  @include apply-status-styles(
+    $color-border-completed,
+    $color-border-current,
+    $color-border-unavailable
+  );
+
+  @include apply-status-styles(
+    $color-text-primary,
+    $color-text-primary,
+    $color-text-unavailable,
+    color
+  );
 
   .warning-icon {
     position: absolute;
@@ -50,19 +65,6 @@ const { title, icon, status } = defineProps<StepCardProps>();
     @media screen and (max-width: 1509px) {
       display: none;
     }
-  }
-
-  &.completed {
-    border: 3px solid $color-border-completed;
-    color: $color-text-primary;
-  }
-  &.current {
-    border: 3px solid $color-border-current;
-    color: $color-text-primary;
-  }
-  &.unavailable {
-    border: 3px solid $color-border-unavailable;
-    color: $color-text-unavailable;
   }
 
   .title-block {
@@ -78,24 +80,21 @@ const { title, icon, status } = defineProps<StepCardProps>();
     }
   }
 
-  .card-link {
-    display: none;
-  }
-
   .card-icon,
   .arrow-btn {
     max-width: 35px;
     max-height: 35px;
 
-    &.completed {
-      color: $color-icon-completed;
-    }
-    &.current {
-      color: $color-border-current;
-    }
-    &.unavailable {
-      color: $color-icon-unavailable;
-    }
+    @include apply-status-styles(
+      $color-icon-completed,
+      $color-border-current,
+      $color-icon-unavailable,
+      color
+    );
+  }
+
+  .card-link {
+    display: none;
   }
 
   &::before {
@@ -111,16 +110,6 @@ const { title, icon, status } = defineProps<StepCardProps>();
     border-right: none;
     border-top: none;
   }
-
-  &.completed::before {
-    border-color: $color-border-completed;
-  }
-  &.current::before {
-    border-color: $color-border-current;
-  }
-  &.unavailable::before {
-    border-color: $color-border-unavailable;
-  }
 }
 
 @media screen and (min-width: 500px) {
@@ -128,7 +117,6 @@ const { title, icon, status } = defineProps<StepCardProps>();
     width: 333px;
     height: 94px;
     padding: 20px 30px;
-    border-radius: 30px;
   }
 
   .card-icon {
@@ -151,7 +139,6 @@ const { title, icon, status } = defineProps<StepCardProps>();
     }
 
     .title-block {
-      display: flex;
       gap: 15px;
       max-width: 100%;
 
@@ -159,19 +146,18 @@ const { title, icon, status } = defineProps<StepCardProps>();
         max-width: 40px;
         max-height: 40px;
       }
+
       p {
         font-size: 20px;
       }
     }
 
-    a {
-      span {
-        font-family: $inter;
-        font-weight: $semi-bold;
-        font-size: 15px;
-        text-transform: uppercase;
-        color: $color-text-secondary;
-      }
+    a span {
+      font-family: $inter;
+      font-weight: $semi-bold;
+      font-size: 15px;
+      text-transform: uppercase;
+      color: $color-text-secondary;
     }
 
     &::before {
