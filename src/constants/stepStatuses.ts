@@ -3,3 +3,5 @@ export const STEP_STATUSES = {
   current: 'current',
   unavailable: 'unavailable',
 } as const;
+
+export type StepStatusKey = keyof typeof STEP_STATUSES;

@@ -1,12 +1,13 @@
 import type { StepIconKey } from '@constants/stepIcons';
 import { defineStore } from 'pinia';
+import { type StepStatusKey } from '@constants/stepStatuses';
 
 export interface Step {
   id: number;
   title: string;
   icon: StepIconKey;
   description: string;
-  status: string;
+  status: StepStatusKey;
 }
 
 export interface StepsStoreProps {

@@ -8,14 +8,14 @@ const stepsStore = useStepsStore();
 
 <template>
   <div class="steps-list">
-    <StepsProgressLine />
+    <StepsProgressLine :steps="stepsStore.steps || []" />
     <div class="steps-cards">
       <StepCard
-        v-for="(step, index) in stepsStore.steps"
+        v-for="step in stepsStore.steps"
         :title="step.title"
         :icon="step.icon"
         :status="step.status"
-        :key="index + 1"
+        :key="step.id"
       />
     </div>
   </div>
