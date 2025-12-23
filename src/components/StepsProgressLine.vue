@@ -76,7 +76,7 @@ const stepsStore = useStepsStore();
       @include step-line-background(unavailable, $color-border-unavailable);
     }
 
-    &:last-child .step-line {
+    &:first-child .step-line {
       display: none;
     }
   }
@@ -92,7 +92,7 @@ const stepsStore = useStepsStore();
       font-size: 25px;
 
       .step-line {
-        transform: translate(0, 115%);
+        transform: translate(0, -115%);
       }
     }
   }
@@ -106,7 +106,7 @@ const stepsStore = useStepsStore();
 
     li {
       .step-line {
-        transform: rotate(-90deg) translate(0, 64%);
+        transform: rotate(-90deg) translate(0, -64%);
         width: 6px;
         height: 289px;
         background-position: center;

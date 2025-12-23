@@ -3,7 +3,7 @@
     :class="['base-button', typeClass]"
     :style="buttonStyle"
     :disabled="disabled || loading"
-    @click="$emit('click', $event)"
+    @click="emit('handleClick', $event)"
   >
     <template v-if="loading">
       <span class="spinner"></span>
@@ -42,6 +42,10 @@ const buttonStyle = useStyle({
   width: props.width,
   height: props.height,
 });
+
+const emit = defineEmits<{
+  (e: 'handleClick', event: MouseEvent): void;
+}>();
 </script>
 
 <style scoped lang="scss">

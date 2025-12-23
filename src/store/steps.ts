@@ -21,7 +21,7 @@ export const useStepsStore = defineStore('stepsStore', {
         icon: 'identification',
         description:
           'Участники сервиса проходят обязательную идентификацию с использованием МСИ (Межбанковской системы идентификации)',
-        status: 'completed',
+        status: 'current',
       },
       {
         id: 2,
