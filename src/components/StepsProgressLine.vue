@@ -66,7 +66,7 @@ const stepsStore = useStepsStore();
 
     .step-line {
       position: absolute;
-      transform: translate(0, 100%);
+      transform: translate(0, -100%);
       width: 6px;
       height: 60px;
       border-radius: 6px;
