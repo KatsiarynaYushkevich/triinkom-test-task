@@ -73,7 +73,7 @@ const emit = defineEmits<{
     font-family: $inter;
 
     &:hover:not(:disabled) {
-      background-color: #0069d9;
+      background-color: $teal-600;
     }
   }
 
@@ -82,7 +82,7 @@ const emit = defineEmits<{
     min-width: 48px;
     min-height: 48px;
     &:hover:not(:disabled) {
-      background-color: #e0e0e0;
+      background-color: $teal-600;
     }
   }
 }
