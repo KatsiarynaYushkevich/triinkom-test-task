@@ -2,12 +2,30 @@
 import { useStepsStore } from '@store/steps';
 import StepCard from '@components/StepCard.vue';
 import StepsProgressLine from '@components/StepsProgressLine.vue';
+import ActionCard from '@components/ActionCard.vue';
+import CustomButton from './CustomButton.vue';
+import { computed } from 'vue';
+import { STEP_STATUSES } from '@constants/stepStatuses';
 
 const stepsStore = useStepsStore();
+const currentStep = computed(() =>
+  stepsStore.steps.find((step) => step.status === STEP_STATUSES.current),
+);
 </script>
 
 <template>
   <div class="steps-list">
+    <ActionCard v-if="currentStep" :description="currentStep.description">
+      <template #buttons>
+        <CustomButton
+          v-for="action in currentStep.actions"
+          :key="action.name"
+          type="basic"
+          :label="action.label"
+        />
+        <CustomButton key="close" type="basic" label="Завершить" />
+      </template>
+    </ActionCard>
     <StepsProgressLine />
     <div class="steps-cards">
       <StepCard

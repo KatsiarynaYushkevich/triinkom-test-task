@@ -1,12 +1,17 @@
 import type { StepIconKey } from '@constants/stepIcons';
 import { defineStore } from 'pinia';
 
+interface CardActions {
+  label: string;
+  name: string;
+}
 export interface Step {
   id: number;
   title: string;
   icon: StepIconKey;
   description: string;
   status: string;
+  actions: CardActions[];
 }
 
 export interface StepsStoreProps {
@@ -22,6 +27,12 @@ export const useStepsStore = defineStore('stepsStore', {
         description:
           'Участники сервиса проходят обязательную идентификацию с использованием МСИ (Межбанковской системы идентификации)',
         status: 'current',
+        actions: [
+          {
+            label: 'пройти идентификацию',
+            name: 'identification',
+          },
+        ],
       },
       {
         id: 2,
@@ -30,6 +41,12 @@ export const useStepsStore = defineStore('stepsStore', {
         description:
           'Для заемщика обязательны к заполнению общие, а также дополнительные сведения для формирования рейтинга',
         status: 'unavailable',
+        actions: [
+          {
+            label: 'заполнить',
+            name: 'fill_info',
+          },
+        ],
       },
       {
         id: 3,
@@ -38,6 +55,16 @@ export const useStepsStore = defineStore('stepsStore', {
         description:
           'Заемщики подписывают согласия на получение данных из кредитного регистра и ФСЗН для формирования рейтинга',
         status: 'unavailable',
+        actions: [
+          {
+            label: 'ПОДПИСАТЬ',
+            name: 'credit_register',
+          },
+          {
+            label: 'ПОДПИСАТЬ',
+            name: 'fszn',
+          },
+        ],
       },
       {
         id: 4,
@@ -46,6 +73,12 @@ export const useStepsStore = defineStore('stepsStore', {
         description:
           'Для возможности полноценного использования функциональность сервиса необходимо привязать карту',
         status: 'unavailable',
+        actions: [
+          {
+            label: 'привязать карту',
+            name: 'bind_card',
+          },
+        ],
       },
     ],
   }),
