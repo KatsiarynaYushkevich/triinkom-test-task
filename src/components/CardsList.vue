@@ -8,7 +8,7 @@ const stepsStore = useStepsStore();
 
 <template>
   <div class="steps-list">
-    <StepsProgressLine :steps="stepsStore.steps" />
+    <StepsProgressLine :steps="stepsStore.steps || []" />
     <div class="steps-cards">
       <StepCard
         v-for="step in stepsStore.steps"
