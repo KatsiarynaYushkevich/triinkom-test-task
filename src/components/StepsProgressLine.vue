@@ -1,14 +1,6 @@
-<script setup lang="ts">
-import { useStepsStore } from '@store/steps';
-import SuccessCheck from '@assets/icons/status/success.svg';
-import { STEP_STATUSES } from '@constants/stepStatuses';
-
-const stepsStore = useStepsStore();
-</script>
-
 <template>
   <ul class="steps-progress">
-    <li v-for="(step, index) in stepsStore.steps" :key="step.id" :class="step.status">
+    <li v-for="(step, index) in steps" :key="step.id" :class="step.status">
       <template v-if="step.status === STEP_STATUSES.completed">
         <SuccessCheck />
       </template>
@@ -19,6 +11,18 @@ const stepsStore = useStepsStore();
     </li>
   </ul>
 </template>
+
+<script setup lang="ts">
+import SuccessCheck from '@assets/icons/status/success.svg';
+import { STEP_STATUSES } from '@constants/stepStatuses';
+import type { Step } from '@store/steps';
+
+interface StepsProgressLineProps {
+  steps: Step[] | undefined;
+}
+
+const { steps } = defineProps<StepsProgressLineProps>();
+</script>
 
 <style lang="scss" scoped>
 .steps-progress {
