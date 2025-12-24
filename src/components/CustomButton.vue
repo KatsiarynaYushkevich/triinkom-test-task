@@ -33,7 +33,7 @@ interface CustomButtonProps {
 const props = withDefaults(defineProps<CustomButtonProps>(), {
   label: 'Button',
   type: BUTTON_TYPES.basic,
-  width: '250px',
+  width: '25px',
   height: '45px',
   disabled: false,
   loading: false,
@@ -78,6 +78,7 @@ function handleClick(event: MouseEvent) {
     font-size: 15px;
     font-weight: $semi-bold;
     font-family: $inter;
+    min-width: 250px;
 
     &:hover:not(:disabled) {
       background-color: $color-basic-hover;
@@ -88,9 +89,10 @@ function handleClick(event: MouseEvent) {
     background-color: transparent;
     min-width: 48px;
     min-height: 48px;
+    border-radius: 50%;
 
     &:hover:not(:disabled) {
-      background-color: $color-basic-hover;
+      background-color: #f5f4fb;
     }
   }
 }

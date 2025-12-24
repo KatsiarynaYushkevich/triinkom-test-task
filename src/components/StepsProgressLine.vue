@@ -14,19 +14,18 @@
 
 <script setup lang="ts">
 import SuccessCheck from '@assets/icons/status/success.svg';
-import { STEP_STATUSES } from '@constants/stepStatuses';
+import { STEP_STATUSES, type StepStatusKey } from '@constants/stepStatuses';
 
-interface StepsProgresBase {
+interface StepsProgressItem {
   id: number;
-  status: string;
+  status: StepStatusKey;
 }
 
-interface StepsProgressLineProps<T extends StepsProgresBase> {
-  steps: T[];
+interface StepsProgressLineProps {
+  steps: StepsProgressItem[];
 }
 
-const props = defineProps<StepsProgressLineProps<StepsProgresBase>>();
-const { steps } = props;
+const { steps } = defineProps<StepsProgressLineProps>();
 </script>
 
 <style lang="scss" scoped>
