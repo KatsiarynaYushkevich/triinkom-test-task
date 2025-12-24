@@ -33,7 +33,6 @@ const { steps } = defineProps<StepsProgressLineProps>();
   display: flex;
   flex-direction: column;
   position: relative;
-  top: -15px;
   z-index: 2;
   gap: 82.5px;
 
@@ -111,6 +110,7 @@ const { steps } = defineProps<StepsProgressLineProps>();
     flex-direction: row;
     width: 1158px;
     justify-content: space-between;
+    top: -15px;
 
     li {
       .step-line {
