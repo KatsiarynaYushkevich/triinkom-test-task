@@ -58,6 +58,24 @@ const resolvedIcon = computed(() => {
   border-radius: 15px;
   background-color: $card-bg;
 
+  transition:
+    transform 0.2s ease-in-out,
+    border-color 0.3s,
+    color 0.3s;
+
+  &::first-child {
+    transition: none;
+  }
+
+  &.completed,
+  &.unavailable {
+    transform: scale(1);
+  }
+
+  &.current {
+    transform: scale(1.05);
+  }
+
   @include apply-status-styles(
     $color-border-completed,
     $color-border-current,
@@ -95,6 +113,7 @@ const resolvedIcon = computed(() => {
   .arrow-btn {
     max-width: 35px;
     max-height: 35px;
+    transition: color 0.3s ease;
 
     @include apply-status-styles(
       $color-icon-completed,
