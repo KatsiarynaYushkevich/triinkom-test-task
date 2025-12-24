@@ -14,11 +14,11 @@
 
 <script setup lang="ts">
 import SuccessCheck from '@assets/icons/status/success.svg';
-import { STEP_STATUSES, type StepStatusKey } from '@constants/stepStatuses';
+import { STEP_STATUSES } from '@constants/stepStatuses';
 
 interface StepsProgressItem {
   id: number;
-  status: StepStatusKey;
+  status: string;
 }
 
 interface StepsProgressLineProps {

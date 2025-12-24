@@ -3,14 +3,13 @@ import WarningIcon from '@assets/icons/status/warning.svg';
 import ArrowIcon from '@assets/icons/ui/arrow.svg';
 import StepCard from '@components/StepCard.vue';
 import CustomButton from '@components/CustomButton.vue';
-import { STEP_STATUSES, type StepStatusKey } from '@constants/stepStatuses';
-import { type StepIconKey } from '@constants/stepIcons';
+import { STEP_STATUSES } from '@constants/stepStatuses';
 
 interface StepListItem {
   id: number;
   title: string;
-  icon?: StepIconKey;
-  status: StepStatusKey;
+  icon?: string;
+  status: string;
 }
 
 interface StepListProps {
