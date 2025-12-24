@@ -1,0 +1,47 @@
+$vela-sans: 'Vela Sans';
+$inter: 'Inter';
+
+$normal: 400;
+$medium: 500;
+$semi-bold: 600;
+$bold: 700;
+$extra-bold: 800;
+
+$vela-sans-font-path: '@assets/fonts/velaSans';
+$inter-font-path: '@assets/fonts/inter';
+
+@font-face {
+  src: url(#{$vela-sans-font-path}/VelaSans-Medium.ttf) format('truetype');
+  font-family: $vela-sans;
+  font-weight: $medium;
+}
+
+@font-face {
+  src: url(#{$vela-sans-font-path}/VelaSans-Regular.ttf) format('truetype');
+  font-family: $vela-sans;
+  font-weight: $normal;
+}
+
+@font-face {
+  src: url(#{$vela-sans-font-path}/VelaSans-SemiBold.ttf) format('truetype');
+  font-family: $vela-sans;
+  font-weight: $semi-bold;
+}
+
+@font-face {
+  src: url(#{$vela-sans-font-path}/VelaSans-Bold.ttf) format('truetype');
+  font-family: $vela-sans;
+  font-weight: $bold;
+}
+
+@font-face {
+  src: url(#{$vela-sans-font-path}/VelaSans-ExtraBold.ttf) format('truetype');
+  font-family: $vela-sans;
+  font-weight: $extra-bold;
+}
+
+@font-face {
+  src: url(#{$inter-font-path}/Inter-SemiBold.ttf) format('truetype');
+  font-family: $inter;
+  font-weight: $semi-bold;
+}

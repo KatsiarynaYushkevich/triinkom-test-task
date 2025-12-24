@@ -1,0 +1,41 @@
+@use '@styles/_variables.scss' as variables;
+
+@mixin apply-status-styles($completed, $current, $unavailable, $css-propery-name: border-color) {
+  &.completed,
+  &.completed::before {
+    #{ $css-propery-name}: $completed;
+  }
+
+  &.current,
+  &.current::before {
+    #{ $css-propery-name}: $current;
+  }
+
+  &.unavailable,
+  &.unavailable::before {
+    #{ $css-propery-name}: $unavailable;
+  }
+}
+
+@mixin step-line-background(
+  $status,
+  $color,
+  $ellipse-height: 4px,
+  $ellipse-width: 8px,
+  $background-size: 30px
+) {
+  &.#{$status} {
+    @if $status == completed {
+      background-color: $color;
+    } @else {
+      background-image: repeating-radial-gradient(
+        ellipse $ellipse-height $ellipse-width,
+        $color 0,
+        $color 100%,
+        transparent 100%,
+        transparent $background-size
+      );
+      background-size: 100% $background-size;
+    }
+  }
+}

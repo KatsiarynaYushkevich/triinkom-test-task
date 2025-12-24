@@ -5,10 +5,22 @@ $card-bg: palette.$white;
 
 $color-text-primary: palette.$purple-900;
 $color-text-secondary: palette.$gray-400;
-$color-text-inverse: palette.$white;
+$color-text-unavailable: palette.$gray-400;
 
-$color-border-default: palette.$gray-400;
-$color-border-warning: palette.$orange-500;
+$color-border-completed: palette.$white;
+$color-border-current: palette.$orange-500;
+$color-border-unavailable: palette.$gray-400;
+
+$color-icon-completed: palette.$teal-500;
+$color-icon-current: palette.$teal-500;
+$color-icon-unavailable: palette.$gray-400;
 
 $color-accent: palette.$teal-500;
 $color-warning: palette.$orange-500;
+
+$color-button-basic: palette.$teal-500;
+$color-button-disabled: palette.$teal-500;
+
+$color-basic-hover: palette.$teal-600;
+
+$spiner-border-color: palette.$white;
