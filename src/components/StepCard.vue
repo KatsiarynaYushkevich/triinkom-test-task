@@ -98,7 +98,7 @@ const resolvedIcon = computed(() => {
 
     @include apply-status-styles(
       $color-icon-completed,
-      $color-border-current,
+      $color-icon-completed,
       $color-icon-unavailable,
       color
     );
@@ -139,6 +139,7 @@ const resolvedIcon = computed(() => {
 @media screen and (min-width: 1510px) {
   .step-card {
     height: 127px;
+    width: 330px;
     padding: 20px 30px;
     flex-direction: column;
     justify-content: center;

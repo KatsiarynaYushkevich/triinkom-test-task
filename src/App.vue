@@ -17,7 +17,11 @@
             <span class="action-text">{{ action.text }}</span>
             <CustomButton type="basic" :label="action.label" />
           </div>
-          <CustomButton type="basic" label="Завершить" />
+          <CustomButton
+            type="basic"
+            label="Завершить"
+            @handleClick="() => completeStep(currentStep?.id!)"
+          />
         </template>
       </ActionCard>
     </div>
@@ -41,6 +45,14 @@ const currentStep = computed(() => {
   if (!stepsStore.steps) return undefined;
   return stepsStore.steps.find((step) => step.status === STEP_STATUSES.current);
 });
+
+const completeStep = (stepId: number) => {
+  const step = stepsStore.steps?.find((step) => step.id === stepId);
+  console.log(step);
+  if (step && step.status === STEP_STATUSES.current) {
+    stepsStore.changeStepStatus(step.id, STEP_STATUSES.completed);
+  }
+};
 </script>
 
 <style lang="scss" scoped>
@@ -71,8 +83,10 @@ const currentStep = computed(() => {
 }
 
 @media screen and (min-width: 550px) {
-  .steps-block {
-    gap: 17px;
+  .wrapper {
+    .steps-block {
+      gap: 17px;
+    }
   }
 }
 

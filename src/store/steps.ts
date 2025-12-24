@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { type StepStatusKey } from '@constants/stepStatuses';
+import { STEP_STATUSES, type StepStatusKey } from '@constants/stepStatuses';
 import { stepsData } from '@data/steps';
 
 interface CardActions {
@@ -34,7 +34,23 @@ export const useStepsStore = defineStore('stepsStore', {
     },
     changeStepStatus(stepId: number, status: StepStatusKey) {
       const step = this.steps?.find((step) => step.id === stepId);
-      if (step) step.status = status;
+      if (!step || !this.steps) return;
+
+      step.status = status;
+
+      if (status === STEP_STATUSES.completed) {
+        const currentIndex = this.steps.findIndex((s) => s.id === stepId);
+
+        if (currentIndex >= 0 && currentIndex < this.steps.length - 1) {
+          const nextStep = this.steps[currentIndex + 1];
+
+          if (nextStep && nextStep.status !== STEP_STATUSES.completed) {
+            nextStep.status = STEP_STATUSES.current;
+          }
+        }
+      }
+
+      this.steps = [...this.steps];
     },
 
     async fetchSteps() {
