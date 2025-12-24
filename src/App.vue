@@ -1,7 +1,13 @@
 <template>
   <div class="wrapper">
     <div class="steps-container">
-      <div class="steps-block">
+      <LoadingSpinner
+        v-if="stepsStore.isLoading"
+        :loading="stepsStore.isLoading"
+        :size="85"
+        :thickness="10"
+      />
+      <div class="steps-block" v-else>
         <StepsProgressLine :steps="stepsStore.steps || []" />
         <CardsList :steps="stepsStore.steps || []" />
       </div>
@@ -22,15 +28,19 @@
 import ActionCard from '@components/ActionCard.vue';
 import CardsList from '@components/CardsList.vue';
 import CustomButton from '@components/CustomButton.vue';
+import LoadingSpinner from '@components/LoadingSpinner.vue';
 import StepsProgressLine from '@components/StepsProgressLine.vue';
 import { STEP_STATUSES } from '@constants/stepStatuses';
 import { useStepsStore } from '@store/steps';
 import { computed } from 'vue';
 
 const stepsStore = useStepsStore();
-const currentStep = computed(() =>
-  stepsStore.steps.find((step) => step.status === STEP_STATUSES.current),
-);
+stepsStore.fetchSteps();
+
+const currentStep = computed(() => {
+  if (!stepsStore.steps) return undefined;
+  return stepsStore.steps.find((step) => step.status === STEP_STATUSES.current);
+});
 </script>
 
 <style lang="scss" scoped>

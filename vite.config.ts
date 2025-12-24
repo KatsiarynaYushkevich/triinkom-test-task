@@ -19,6 +19,7 @@ export default defineConfig({
       '@components': path.resolve(__dirname, 'src/components'),
       '@composables': path.resolve(__dirname, 'src/composables'),
       '@constants': path.resolve(__dirname, 'src/constants'),
+      '@data': path.resolve(__dirname, 'src/data'),
       '@styles': path.resolve(__dirname, 'src/styles'),
       '@store': path.resolve(__dirname, 'src/store'),
     },

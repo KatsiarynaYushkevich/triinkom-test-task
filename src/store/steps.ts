@@ -1,6 +1,6 @@
-import type { StepIconKey } from '@constants/stepIcons';
 import { defineStore } from 'pinia';
 import { type StepStatusKey } from '@constants/stepStatuses';
+import { stepsData } from '@data/steps';
 
 interface CardActions {
   text?: string;
@@ -10,80 +10,45 @@ interface CardActions {
 export interface Step {
   id: number;
   title: string;
-  icon: StepIconKey;
+  icon: string;
   description: string;
-  status: StepStatusKey;
+  status: string;
   actions: CardActions[];
 }
 
 export interface StepsStoreProps {
   steps: Step[] | undefined;
+  isLoading: boolean;
+  error: string | null;
 }
+
 export const useStepsStore = defineStore('stepsStore', {
   state: (): StepsStoreProps => ({
-    steps: [
-      {
-        id: 1,
-        title: 'Пройдите идентификацию',
-        icon: 'identification',
-        description:
-          'Участники сервиса проходят обязательную идентификацию с использованием МСИ (Межбанковской системы идентификации)',
-        status: 'current',
-        actions: [
-          {
-            label: 'пройти идентификацию',
-            name: 'identification',
-          },
-        ],
-      },
-      {
-        id: 2,
-        title: 'Заполнить анкету',
-        icon: 'register',
-        description:
-          'Для заемщика обязательны к заполнению общие, а также дополнительные сведения для формирования рейтинга',
-        status: 'unavailable',
-        actions: [
-          {
-            label: 'заполнить',
-            name: 'fill_info',
-          },
-        ],
-      },
-      {
-        id: 3,
-        title: 'Подпишите согласия',
-        icon: 'agreement',
-        description:
-          'Заемщики подписывают согласия на получение данных из кредитного регистра и ФСЗН для формирования рейтинга',
-        status: 'unavailable',
-        actions: [
-          {
-            text: 'Кредитный регистр',
-            label: 'ПОДПИСАТЬ',
-            name: 'credit_register',
-          },
-          {
-            text: 'ФСЗН',
-            label: 'ПОДПИСАТЬ',
-            name: 'fszn',
-          },
-        ],
-      },
-      {
-        id: 4,
-        title: 'Привязать карту',
-        icon: 'card',
-        description:
-          'Для возможности полноценного использования функциональность сервиса необходимо привязать карту',
-        status: 'unavailable',
-        actions: [
-          {
-            label: 'привязать карту',
-            name: 'bind_card',
-          },
-        ],
-      },
-    ],
+    steps: [],
+    isLoading: false,
+    error: '',
   }),
+  actions: {
+    setSteps(steps: Step[]) {
+      this.steps = steps;
+    },
+    changeStepStatus(stepId: number, status: StepStatusKey) {
+      const step = this.steps?.find((step) => step.id === stepId);
+      if (step) step.status = status;
+    },
+
+    async fetchSteps() {
+      this.isLoading = true;
+      this.error = null;
+
+      try {
+        await new Promise((resolve) => setTimeout(resolve, 2000));
+        this.steps = stepsData;
+      } catch {
+        this.error = 'An error occured during steps fetching';
+      } finally {
+        this.isLoading = false;
+      }
+    },
+  },
 });

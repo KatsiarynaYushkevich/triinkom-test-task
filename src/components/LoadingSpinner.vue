@@ -51,7 +51,6 @@ const {
     border: var(--spinner-thickness) solid $spiner-border-color;
     border-top-color: var(--spinner-color);
     animation: spin var(--spinner-speed) linear infinite;
-    box-sizing: border-box;
   }
 }
 

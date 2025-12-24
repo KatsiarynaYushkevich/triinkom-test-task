@@ -1,15 +1,27 @@
 <script setup lang="ts">
 import { STEP_ICONS, type StepIconKey } from '@constants/stepIcons';
-import { STEP_STATUSES, type StepStatusKey } from '@constants/stepStatuses';
+import { STEP_STATUSES } from '@constants/stepStatuses';
+import { computed } from 'vue';
 
 interface StepCardProps {
   title: string;
-  icon?: StepIconKey;
-  status: StepStatusKey;
+  icon?: string;
+  status: string;
   customClass?: string;
 }
 
-const { title, icon, status } = defineProps<StepCardProps>();
+const { title, icon, status, customClass } = defineProps<StepCardProps>();
+
+function isStepIconKey(key: string): key is StepIconKey {
+  return key in STEP_ICONS;
+}
+
+const resolvedIcon = computed(() => {
+  if (icon && isStepIconKey(icon)) {
+    return STEP_ICONS[icon];
+  }
+  return undefined;
+});
 </script>
 
 <template>
@@ -19,7 +31,7 @@ const { title, icon, status } = defineProps<StepCardProps>();
     </div>
     <div class="title-block">
       <div class="card-icon" :class="status">
-        <component v-if="icon" :is="STEP_ICONS[icon]" class="icon" />
+        <component v-if="icon" :is="resolvedIcon" class="icon" />
       </div>
       <p>{{ title }}</p>
     </div>
