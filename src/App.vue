@@ -1,18 +1,36 @@
 <template>
   <div class="wrapper">
-    <div class="steps-list">
-      <StepsProgressLine :steps="stepsStore.steps || []" />
-      <CardsList :steps="stepsStore.steps || []" />
+    <div class="steps-container">
+      <div class="steps-block">
+        <StepsProgressLine :steps="stepsStore.steps || []" />
+        <CardsList :steps="stepsStore.steps || []" />
+      </div>
+      <ActionCard v-if="currentStep" :description="currentStep.description">
+        <template #buttons>
+          <div v-for="action in currentStep.actions" :key="action.name" class="action-row">
+            <span class="action-text">{{ action.text }}</span>
+            <CustomButton type="basic" :label="action.label" />
+          </div>
+          <CustomButton type="basic" label="Завершить" />
+        </template>
+      </ActionCard>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import ActionCard from '@components/ActionCard.vue';
 import CardsList from '@components/CardsList.vue';
+import CustomButton from '@components/CustomButton.vue';
 import StepsProgressLine from '@components/StepsProgressLine.vue';
+import { STEP_STATUSES } from '@constants/stepStatuses';
 import { useStepsStore } from '@store/steps';
+import { computed } from 'vue';
 
 const stepsStore = useStepsStore();
+const currentStep = computed(() =>
+  stepsStore.steps.find((step) => step.status === STEP_STATUSES.current),
+);
 </script>
 
 <style lang="scss" scoped>
@@ -23,29 +41,52 @@ const stepsStore = useStepsStore();
   display: flex;
   justify-content: center;
 
-  .steps-list {
-    min-width: 325px;
+  .steps-container {
+    margin-top: 20px;
+    height: 50%;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 15px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 30px;
+
+    .steps-block {
+      min-width: 325px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+    }
   }
 }
 
 @media screen and (min-width: 550px) {
-  .wrapper {
-    .steps-list {
-      gap: 17px;
-    }
+  .steps-block {
+    gap: 17px;
   }
 }
-@media screen and (min-width: 1510px) {
+
+@media screen and (min-width: 1000px) {
   .wrapper {
-    .steps-list {
-      flex-direction: column-reverse;
+    .steps-container {
+      flex-direction: row;
       align-items: center;
       justify-content: flex-end;
     }
+  }
+}
+
+@media screen and (min-width: 1510px) {
+  .wrapper {
+    .steps-container {
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+    }
+  }
+
+  .steps-block {
+    flex-direction: column-reverse;
   }
 }
 </style>

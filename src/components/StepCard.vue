@@ -126,7 +126,6 @@ const { title, icon, status } = defineProps<StepCardProps>();
 
 @media screen and (min-width: 1510px) {
   .step-card {
-    width: 330px;
     height: 127px;
     padding: 20px 30px;
     flex-direction: column;
