@@ -78,6 +78,7 @@ const completeStep = (stepId: number) => {
       align-items: center;
       justify-content: space-between;
       gap: 15px;
+      perspective: 500px;
     }
   }
 }
