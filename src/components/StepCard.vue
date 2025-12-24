@@ -1,30 +1,32 @@
 <script setup lang="ts">
 import { STEP_ICONS, type StepIconKey } from '@constants/stepIcons';
-import { STEP_STATUSES } from '@constants/stepStatuses';
-import ArrowIcon from '@assets/icons/ui/arrow.svg';
-import WarningIcon from '@assets/icons/status/warning.svg';
+import { STEP_STATUSES, type StepStatusKey } from '@constants/stepStatuses';
 
 interface StepCardProps {
   title: string;
   icon?: StepIconKey;
-  status: string;
+  status: StepStatusKey;
+  customClass?: string;
 }
 
 const { title, icon, status } = defineProps<StepCardProps>();
 </script>
 
 <template>
-  <div class="step-card" :class="status">
-    <WarningIcon v-if="status === STEP_STATUSES.current" class="warning-icon" />
+  <div class="step-card" :class="[status, customClass]">
+    <div class="warning-icon" v-if="status === STEP_STATUSES.current">
+      <slot name="warning-icon" />
+    </div>
     <div class="title-block">
       <div class="card-icon" :class="status">
         <component v-if="icon" :is="STEP_ICONS[icon]" class="icon" />
       </div>
       <p>{{ title }}</p>
     </div>
-    <button class="arrow-btn" :class="status">
-      <ArrowIcon />
-    </button>
+    <div class="arrow-btn" :class="status">
+      <slot name="arrow-btn" class="arrow-btn" :class="status" />
+    </div>
+
     <a href="#" class="card-link"> <span>Подробнее</span></a>
     <slot></slot>
   </div>
@@ -61,10 +63,7 @@ const { title, icon, status } = defineProps<StepCardProps>();
     position: absolute;
     top: 8px;
     right: 7px;
-
-    @media screen and (max-width: 1509px) {
-      display: none;
-    }
+    display: none;
   }
 
   .title-block {
@@ -127,7 +126,6 @@ const { title, icon, status } = defineProps<StepCardProps>();
 
 @media screen and (min-width: 1510px) {
   .step-card {
-    width: 330px;
     height: 127px;
     padding: 20px 30px;
     flex-direction: column;
@@ -171,6 +169,10 @@ const { title, icon, status } = defineProps<StepCardProps>();
 
     .arrow-btn {
       display: none;
+    }
+
+    .warning-icon {
+      display: block;
     }
   }
 }

@@ -1,7 +1,9 @@
 import type { StepIconKey } from '@constants/stepIcons';
 import { defineStore } from 'pinia';
+import { type StepStatusKey } from '@constants/stepStatuses';
 
 interface CardActions {
+  text?: string;
   label: string;
   name: string;
 }
@@ -10,7 +12,7 @@ export interface Step {
   title: string;
   icon: StepIconKey;
   description: string;
-  status: string;
+  status: StepStatusKey;
   actions: CardActions[];
 }
 
@@ -57,10 +59,12 @@ export const useStepsStore = defineStore('stepsStore', {
         status: 'unavailable',
         actions: [
           {
+            text: 'Кредитный регистр',
             label: 'ПОДПИСАТЬ',
             name: 'credit_register',
           },
           {
+            text: 'ФСЗН',
             label: 'ПОДПИСАТЬ',
             name: 'fszn',
           },

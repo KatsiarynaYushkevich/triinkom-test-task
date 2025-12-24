@@ -1,7 +1,9 @@
 <template>
   <div class="action-card">
     <p class="description">{{ description }}</p>
-    <slot name="buttons"></slot>
+    <div class="buttons">
+      <slot name="buttons" />
+    </div>
   </div>
 </template>
 
@@ -23,12 +25,11 @@ const { description } = defineProps<ActionCardProps>();
   display: flex;
   flex-direction: column;
   gap: 20px;
+  font-family: $vela-sans;
+  font-weight: $normal;
+  color: $color-text-primary;
 
   .description {
-    font-size: 15px;
-    font-family: $vela-sans;
-    font-weight: $normal;
-    color: $color-text-primary;
     line-height: 140%;
   }
 
@@ -36,6 +37,12 @@ const { description } = defineProps<ActionCardProps>();
     display: flex;
     flex-direction: column;
     gap: 8px;
+
+    &::v-deep(.action-row) {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
   }
 }
 </style>
